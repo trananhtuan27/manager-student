@@ -1,19 +1,14 @@
 <?php
-
 require_once('Model/DBconnect.php');
-
-
 $data = "SELECT *  FROM shiken INNER JOIN student ON student.student_code = shiken.student_code
 INNER JOIN naitei ON naitei.student_code = shiken.student_code
-INNER JOIN recruit ON recruit.student_code = shiken.student_code
-WHERE student.status = 0|| 1;";
+INNER JOIN recruit ON recruit.student_code = shiken.student_code";
 //phuong thuc khoi tao sesstion de tao phien lam viec tren browser//
 if (!isset($_SESSION)) {
     session_start();
 }
 //chuc nang seacher lay name trong html dung toan tu 3 ngoi//
 $key = (isset($_GET['keyword'])) ? $_GET['keyword'] : [];
-
 
 //* session của login dùng toan tử 3 ngồi để xét giá trị nếu isset (kiểm tra sesion user (name trong html) thì chyaj session đó không thì in ra rỗng)
 $student = (isset($_SESSION['student'])) ? $_SESSION['student'] : [];
@@ -25,12 +20,10 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 if (!empty($keyword)) {
     $search = "SELECT *  FROM shiken INNER JOIN student ON student.student_code = shiken.student_code
         INNER JOIN naitei ON naitei.student_code = shiken.student_code
-        INNER JOIN recruit ON recruit.student_code = shiken.student_code;
-WHERE `company_name` like '%" . $key . "%'";
+        INNER JOIN recruit ON recruit.student_code = shiken.student_code 
+       WHERE `company_name` like '%" . $key . "%'";
 //kết nối với DB nếu có thí sẽ lấy DB và lưu
     $result = mysqli_query($conn, $search);
-
-    die($result);
 } else {
     $result = mysqli_query($conn, $data);
 }
@@ -47,10 +40,17 @@ WHERE `company_name` like '%" . $key . "%'";
         } ?>
         <?php if (isset($_SESSION['profile_update_success'])) { ?>
             <div class="alert alert-primary" role="alert">
-               Chúc mừng bạn cập nhật thông tin thành công!
+                Chúc mừng bạn cập nhật thông tin thành công!
             </div>
             <?php
             unset($_SESSION['profile_update_success']);
+        } ?>
+        <?php if (isset($_SESSION['create_report_success'])) { ?>
+            <div class="alert alert-primary" role="alert">
+                Chúc mừng bạn tạo báo cáo thành công!
+            </div>
+            <?php
+            unset($_SESSION['create_report_success']);
         } ?>
         <!-- <img src="../../../public/assets/web/image/background-home.png" width="100%" alt="background-home"> -->
         <div class="content-home">

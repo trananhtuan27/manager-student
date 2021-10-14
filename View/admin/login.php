@@ -61,11 +61,11 @@ if (isset($_POST['email'])) {
                 $_SESSION['user-admin'] = $data;
                 header('Location: http://localhost/democode/view/admin/index.php');
             } else {
-                echo "こちらのユーザーは管理者の役割がありません。";
+                $errorAdmin =  "こちらのユーザーは管理者の役割がありません。";
             }
 
         } else {
-            echo "パスワードを間違います。";
+            $errorPassword =  "パスワードを間違います。";
         }
     }
 }
@@ -100,7 +100,10 @@ if (isset($_POST['email'])) {
 							<i class="fa fa-lock"></i>
 						</span>
                     </div>
-
+                    <div class="error-validate" style="color: red">
+                        <span><?php echo (isset($errorAdmin)) ? $errorAdmin : '' ?></span>
+                        <span><?php echo (isset($errorPassword)) ? $errorPassword : '' ?></span>
+                    </div>
                     <div class="container-login100-form-btn p-t-10">
                         <button type="submit" class="login100-form-btn">
                             ログイン

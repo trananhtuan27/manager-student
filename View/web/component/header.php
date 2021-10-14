@@ -6,12 +6,18 @@ if (!isset($_SESSION)) {
 }
 $student = (isset($_SESSION['student'])) ? $_SESSION['student'] : [];
 $studentId = (isset($_SESSION['student'])) ? $student['id'] : [];
-
+$student_code = (isset($_SESSION['student'])) ? $student['student_code'] : [];
 if (isset($_SESSION['student'])){
     $nameStudent = "SELECT `name` FROM `student` WHERE id = $studentId";
     $query = mysqli_query($conn, $nameStudent);
     $data = mysqli_fetch_assoc($query);
+
+    $shartReport = "SELECT `shiken_kekka` FROM `naitei` WHERE student_code = '$student_code'";
+    $queryNaitei = mysqli_query($conn, $shartReport);
+    $dataNaitei = mysqli_fetch_assoc($queryNaitei);
+
 }
+
 
 ?>
 <section>
@@ -45,18 +51,36 @@ if (isset($_SESSION['student'])){
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                         <?php if (isset($student['name'])) { ?>
                             <div class="profile-createform">
-                                <div class="create-form">
-                                    <a href="?view=create_form">報告書新登録</a>
-                                </div>
-                                <div class="dropdown">
-                              <p class="dropbtn">
-                                    <?php echo $data['name'] ?></p>
-
-                                    <div class="dropdown-content">
-                                        <a href="?view=profile_user">情報変更</a>
-                                        <a href="?view=logout">ログアウト</a>
+                                <?php
+                                if (!empty($dataNaitei)) {  ?>
+                                    <div class="create-form">
+                                        <a href="javascript:0" onclick="errorReport()">Tạo báo cáo</a>
                                     </div>
-                                </div>
+                                    <div class="dropdown">
+                                        <p class="dropbtn">
+                                            <?php echo $data['name'] ?></p>
+
+                                        <div class="dropdown-content">
+                                            <a href="?view=profile_user">情報変更</a>
+                                            <a href="?view=logout">ログアウト</a>
+                                        </div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="create-form">
+                                        <a href="?view=create_form">Tạo báo cáo</a>
+                                    </div>
+                                    <div class="dropdown">
+                                        <p class="dropbtn">
+                                            <?php echo $data['name'] ?></p>
+
+                                        <div class="dropdown-content">
+                                            <a href="?view=profile_user">情報変更</a>
+                                            <a href="?view=logout">ログアウト</a>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+
+
                             </div>
                         <?php } else { ?>
                             <div class="register-login">

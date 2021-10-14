@@ -113,6 +113,13 @@
             window.location = "http://localhost/democode/?view=login";
         });
     }
+    function errorReport() {
+        sweetAlert({
+            title: "Xin lỗi!",
+            text: "Mỗi người chị tạo được 1 báo cáo!",
+            type: 'warning'
+        });
+    }
 </script>
 </body>
 

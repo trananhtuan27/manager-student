@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="197a0e28-a2d8-4dda-bdc9-27bea6e05432" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/View/admin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/admin/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/web/component/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/web/component/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/web/page/create_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/web/page/create_form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/web/page/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/web/page/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/AdminLTE-master/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1wu4L1ian0aiscSaMttOZ1WZ1XS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../poco_accessories" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.stylelint" value="$PROJECT_DIR$/../../../Program Files/nodejs/node" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.stylelint" value="" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\hokokusho2021\public\assets\admin\login" />
+      <recent name="C:\xampp\htdocs\hokokusho2021\public\assets\admin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\hokokusho2021\view\admin" />
+      <recent name="C:\xampp\htdocs\hokokusho2021\view\admin\page" />
+      <recent name="C:\xampp\htdocs\hokokusho2021\Model\database" />
+      <recent name="C:\xampp\htdocs\hokokusho2021\view\web\page" />
+      <recent name="C:\xampp\htdocs\hokokusho2021\public\assets\web" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="197a0e28-a2d8-4dda-bdc9-27bea6e05432" name="Default Changelist" comment="" />
+      <created>1629295088675</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1629295088675</updated>
+      <workItem from="1629295090721" duration="12656000" />
+      <workItem from="1629378237672" duration="19448000" />
+      <workItem from="1629471499396" duration="22000" />
+      <workItem from="1629471525582" duration="8969000" />
+      <workItem from="1629517645604" duration="28434000" />
+      <workItem from="1629607550797" duration="22711000" />
+      <workItem from="1629724703594" duration="15278000" />
+      <workItem from="1629770708433" duration="8362000" />
+      <workItem from="1629808256948" duration="13464000" />
+      <workItem from="1629826726560" duration="1885000" />
+      <workItem from="1629890103043" duration="17575000" />
+      <workItem from="1630660385547" duration="19000" />
+      <workItem from="1630680050840" duration="31000" />
+      <workItem from="1630747538146" duration="117000" />
+      <workItem from="1630748832843" duration="157000" />
+      <workItem from="1630764163844" duration="44000" />
+      <workItem from="1630772321319" duration="1097000" />
+      <workItem from="1630835606195" duration="10430000" />
+      <workItem from="1634141010527" duration="11838000" />
+      <workItem from="1634225538387" duration="9095000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

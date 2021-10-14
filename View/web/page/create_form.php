@@ -3,8 +3,16 @@ require_once('Model/DBconnect.php');
 if (!isset($_SESSION)) {
     session_start();
 }
-$student = (isset($_SESSION['student'])) ? $_SESSION['student'] : [];
+
 $error = [];
+
+if (isset($_SESSION['student'])) {
+    $student = (isset($_SESSION['student'])) ? $_SESSION['student'] : [];
+} else {
+    header("Location: http://localhost/democode/?view=login"); /* Redirect browser */
+}
+$studentId = $student['id'];
+
 if (isset($_POST['name'])) {
     $name = $_POST['name'];
     $student_code = $_POST['student_code'];
@@ -87,13 +95,11 @@ if (isset($_POST['name'])) {
     $jikan_tekisei = $_POST['jikan_tekisei'];
     $ichimensetsu = $_POST['ichimensetsu'];
     $jikan_ichimensetsu = $_POST['jikan_ichimensetsu'];
-    $keishiki_ichimensetsu = $_POST['keishiki_ichimensetsu'];
-    // $keishiki_ichimensetsu = isset($_POST['keishiki_ichimensetsu']) ? $_POST['keishiki_ichimensetsu'] : '';
+    $keishiki_ichimensetsu = isset($_POST['keishiki_ichimensetsu']) ? $_POST['keishiki_ichimensetsu'] : '';
 
     $nijimensetsu = $_POST['nijimensetsu'];
     $jikan_nijikanmensetsu = $_POST['jikan_nijikanmensetsu'];
-    $keishiki_ni = $_POST['keishiki_ni'];
-    // $keishiki_ni = isset($_POST['keishiki_ni']) ? $_POST['keishiki_ni'] : '';
+    $keishiki_ni = isset($_POST['keishiki_ni']) ? $_POST['keishiki_ni'] : '';
 
 
     if (empty($date_time_interview)) {
@@ -164,7 +170,8 @@ if (isset($_POST['name'])) {
     }
 
     if (empty($error)) {
-        $sql = "UPDATE student SET  registration_date = '$registration_date',company_name = '$company_name',address = '$address',status = '0';
+
+        $sql = "UPDATE student SET `student_code`='$student_code', `registration_date`='$registration_date' ,`company_name`='$company_name',`address`='$address' WHERE id='$studentId';
         INSERT INTO naitei (student_code,shiken_kekka,naitei,naiteibi,method,advice)
         VALUES ('$student_code','$shiken_kekka','$naitei','$naiteibi','$method','$advice');
         INSERT INTO recruit (student_code,recruitment_method,interview_content,career_field)
@@ -173,12 +180,13 @@ if (isset($_POST['name'])) {
         VALUES ('$student_code','$date_time_interview','$jikan','$kaiyou','$action','$general_job','$jikan_general_job','$ronbun',
             '$jikan_ronbun','$senmon','$jikan_senmon','$gengo','$jikan_gengo','$tekisei','$jikan_tekisei',
             '$ichimensetsu','$jikan_ichimensetsu','$keishiki_ichimensetsu','$nijimensetsu','$jikan_nijikanmensetsu','$keishiki_ni');";
-        $query = $conn->multi_query($sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
+        $query = $conn->multi_query($sql) or trigger_error("Query Failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
+        $_SESSION['create_report_success'] = "Tạo Báo cáo thành công";
         header('Location: http://localhost/democode/');
     } else {
         $query = isset($array['query']) ? $array['query'] : '';
     }
-    
+
 }
 ?>
 
@@ -191,11 +199,13 @@ if (isset($_POST['name'])) {
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                         <div class="form-left">
-                            <input type="text" hidden name="student_code" value="<?php echo $student['student_code']?>">
+                            <input type="text" hidden name="student_code"
+                                   value="<?php echo $student['student_code'] ?>">
                             <div class="form-left-firt">
                                 <label class="input-registration_date">
                                     <p>提出日</p>
-                                    <input name="registration_date" type="date" value=" <?php echo $student['registration_date']?>">
+                                    <input name="registration_date" type="date"
+                                           value=" <?php echo $student['registration_date'] ?>">
                                 </label>
                                 <div class="error-validate">
                                     <span><?php echo (isset($error['registration_date'])) ? $error['registration_date'] : '' ?></span>
@@ -203,12 +213,13 @@ if (isset($_POST['name'])) {
                                 <div class="code-name-gender-student">
                                     <label class="code-student-code">
                                         <p class="code-student">学生番号</p>
-                                        <input name="student_code" type="text" value="<?php echo $student['student_code']?>">
+                                        <input name="student_code" type="text"
+                                               value="<?php echo $student['student_code'] ?>">
                                     </label>
 
                                     <label class="full-name-label">
                                         <p class="full-name"> 名前</p>
-                                        <input name="name" type="text" id="name" value="<?php echo $student['name']?>">
+                                        <input name="name" type="text" id="name" value="<?php echo $student['name'] ?>">
                                     </label>
 
                                     <label class="gender-label">
@@ -248,57 +259,57 @@ if (isset($_POST['name'])) {
                                     <label>
                                         <p class="slect-chapter-firt_item">応募方法</p>
                                         <select name="recruitment_method">
-                                            <option value ="学科紹介">学科紹介</option>
-                                            <option value ="就職課紹介">就職課紹介</option>
-                                            <option value ="自由応募">自由応募</option>
-                                            <option value ="縁故">縁故</option>
-                                            <option value ="その他">その他</option>
-                                            
+                                            <option value="学科紹介">学科紹介</option>
+                                            <option value="就職課紹介">就職課紹介</option>
+                                            <option value="自由応募">自由応募</option>
+                                            <option value="縁故">縁故</option>
+                                            <option value="その他">その他</option>
+
                                         </select>
                                     </label>
 
                                     <label>
                                         <p>訪問内容</p>
                                         <select name="interview_content">
-                                            <option value ="セミナー">セミナー</option>
-                                            <option value ="OB訪問">OB訪問</option>
-                                            <option value ="工場見学">工場見学</option>
-                                            <option value ="会社訪問">会社訪問</option>
-                                            <option value ="試験">試験</option>
-                                            <option value ="面接">面接</option>
-                                            <option value ="内定研修">内定研修</option>
-                                            <option value ="その他">その他</option>
+                                            <option value="セミナー">セミナー</option>
+                                            <option value="OB訪問">OB訪問</option>
+                                            <option value="工場見学">工場見学</option>
+                                            <option value="会社訪問">会社訪問</option>
+                                            <option value="試験">試験</option>
+                                            <option value="面接">面接</option>
+                                            <option value="内定研修">内定研修</option>
+                                            <option value="その他">その他</option>
                                         </select>
                                     </label>
 
                                     <label>
                                         <p>職種</p>
                                         <select name="career_field">
-                                            <option value ="建設技術">建設技術</option>
-                                            <option value ="電気技術">電気技術</option>
-                                            <option value ="機械技術">機械技術</option>
-                                            <option value ="製造技術">製造技術</option>
-                                            <option value ="設計">設計</option>
-                                            <option value ="デザイン">デザイン</option>
-                                            <option value ="情纂・測量">情纂・測量</option>
-                                            <option value ="現場指導">現場指導</option>
-                                            <option value ="研究開発">研究開発</option>
-                                            <option value ="品質管理">品質管理</option>
-                                            <option value ="生産管理">生産管理</option>
-                                            <option value ="検査">検査</option>
-                                            <option value ="サービスエンジニア">サービスエンジニア</option>
-                                            <option value ="システムエンジニア">システムエンジニア</option>
-                                            <option value ="プログラマー">プログラマー</option>
-                                            <option value ="企画・調査">企画・調査</option>
-                                            <option value ="セールスエンジニア">セールスエンジニア</option>
-                                            <option value ="福集・取材">福集・取材</option>
-                                            <option value ="営業・販売">営業・販売</option>
-                                            <option value ="プロパー">プロパー</option>
-                                            <option value ="サービス">サービス</option>
-                                            <option value ="事務">事務</option>
-                                            <option value ="教員">教員</option>
-                                            <option value ="公務員">公務員</option>
-                                            <option value ="その他">その他</option>
+                                            <option value="建設技術">建設技術</option>
+                                            <option value="電気技術">電気技術</option>
+                                            <option value="機械技術">機械技術</option>
+                                            <option value="製造技術">製造技術</option>
+                                            <option value="設計">設計</option>
+                                            <option value="デザイン">デザイン</option>
+                                            <option value="情纂・測量">情纂・測量</option>
+                                            <option value="現場指導">現場指導</option>
+                                            <option value="研究開発">研究開発</option>
+                                            <option value="品質管理">品質管理</option>
+                                            <option value="生産管理">生産管理</option>
+                                            <option value="検査">検査</option>
+                                            <option value="サービスエンジニア">サービスエンジニア</option>
+                                            <option value="システムエンジニア">システムエンジニア</option>
+                                            <option value="プログラマー">プログラマー</option>
+                                            <option value="企画・調査">企画・調査</option>
+                                            <option value="セールスエンジニア">セールスエンジニア</option>
+                                            <option value="福集・取材">福集・取材</option>
+                                            <option value="営業・販売">営業・販売</option>
+                                            <option value="プロパー">プロパー</option>
+                                            <option value="サービス">サービス</option>
+                                            <option value="事務">事務</option>
+                                            <option value="教員">教員</option>
+                                            <option value="公務員">公務員</option>
+                                            <option value="その他">その他</option>
                                         </select>
                                     </label>
 
@@ -472,11 +483,11 @@ if (isset($_POST['name'])) {
                                 <label>
                                     <p>形式</p>
                                     <div class="display-radio">
-                                    <input type="radio" id="persional" name="keishiki_ichimensetsu" value="個人">
-                                    <label for="個人">個人</label>
+                                        <input type="radio" id="persional" name="keishiki_ichimensetsu" value="個人">
+                                        <label for="個人">個人</label>
 
-                                    <input type="radio" id="group" name="keishiki_ichimensetsu" value="グループ">
-                                    <label for="グループ">グループ</label>
+                                        <input type="radio" id="group" name="keishiki_ichimensetsu" value="グループ">
+                                        <label for="グループ">グループ</label>
                                     </div>
 
                                 </label>
@@ -500,13 +511,13 @@ if (isset($_POST['name'])) {
                                 </div>
                                 <label>
                                     <p>形式</p>
-                                  <div class="display-radio">
-                                  <input type="radio" id="persional" name="keishiki_ni" value="個人">
-                                    <label for="個人">個人</label>
+                                    <div class="display-radio">
+                                        <input type="radio" id="persional" name="keishiki_ni" value="個人">
+                                        <label for="個人">個人</label>
 
-                                    <input type="radio" id="theo_nhom" name="keishiki_ni" value="グループ">
-                                    <label for="グループ">グループ</label>
-                                  </div>
+                                        <input type="radio" id="theo_nhom" name="keishiki_ni" value="グループ">
+                                        <label for="グループ">グループ</label>
+                                    </div>
                                 </label>
                                 <div class="error-validate">
                                     <span><?php echo (isset($error['keishiki_ni'])) ? $error['keishiki_ni'] : '' ?></span>
@@ -521,7 +532,6 @@ if (isset($_POST['name'])) {
             </div>
         </form>
     </div>
-
 
 
 </section>
