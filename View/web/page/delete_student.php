@@ -5,8 +5,7 @@ require_once('Model/DBconnect.php');
 if (isset($_GET['student_code'])){
     $student_code = $_GET['student_code'];
 
-    $sql = "DELETE student , shiken  FROM student  INNER JOIN shiken  
-    WHERE student.student_code= shiken.student_code and student.student_code = '$student_code'";
+    $sql = "DELETE  FROM shiken and student_code = '$student_code'";
     $sql1 = "DELETE recruit , naitei  FROM recruit  INNER JOIN naitei  
      WHERE recruit.student_code= naitei.student_code and recruit.student_code = '$student_code'";
     $query = mysqli_query($conn,$sql);
