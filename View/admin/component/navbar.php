@@ -1,8 +1,16 @@
 <?php
 ob_start();
-
+require_once('../../Model/DBconnect.php');
 if (!isset($_SESSION)) {
     session_start();
+}
+$admin = (isset($_SESSION['user-admin'])) ? $_SESSION['user-admin'] : [];
+$adminId = (isset($_SESSION['user-admin'])) ? $admin['id'] : [];
+if (isset($_SESSION['user-admin'])){
+    $nameAdmin = "SELECT `name` FROM `student` WHERE id = $adminId";
+    $query = mysqli_query($conn, $nameAdmin);
+    $data = mysqli_fetch_assoc($query);
+
 }
 ?>
 <section>
@@ -20,13 +28,27 @@ if (!isset($_SESSION)) {
         </ul>
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            
-            <li class="nav-item">
-               <p style="margin: 5px 0px"><a class="btn btn-danger" href="?view=logout">ログアウト</a></p>
-            </li>
-        </ul>
+
+       <ul class="navbar-nav ml-auto">
+           <li class="nav-item dropdown">
+               <a class="nav-link" data-toggle="dropdown" href="#">
+
+                   <?php echo $data['name'] ?>
+               </a>
+               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                   <div class="dropdown-divider"></div>
+                   <a href="?view=profile-admin" class="dropdown-item">
+                    Sửa  Trang cá nhân
+                   </a>
+                   <div class="dropdown-divider"></div>
+                   <a href="?view=logout" class="dropdown-item">
+                       Logout
+                   </a>
+
+
+               </div>
+           </li>
+       </ul>
     </nav>
     <!-- /.navbar -->
 
@@ -44,12 +66,9 @@ if (!isset($_SESSION)) {
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <!-- <div class="image">
-                    <img src="<?php echo $user_admin['thumb'] ?>"
-                         class="img-circle elevation-2" alt="User Image">
-                </div> -->
+
                 <div class="info">
-                    <a href="#" class="d-block"><?php echo $user_admin['name'] ?></a>
+                    <a href="#" class="d-block"><?php echo $data['name'] ?></a>
                 </div>
             </div>
 
@@ -72,8 +91,8 @@ if (!isset($_SESSION)) {
                             <?php 
                             
                             ?>
-                            <li class="nav-item">
-                                <a href="?view=user" class="nav-link">
+                            <li class="nav-item" id="change-background">
+                                <a onclick="ChangeBackGround()" href="?view=student" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>ユーザー管理</p>
                                 </a>
@@ -93,5 +112,14 @@ if (!isset($_SESSION)) {
         </div>
         <!-- /.sidebar -->
     </aside>
-
+    <style>
+        .active-background {
+            background: red;
+        }
+    </style>
+    <script>
+        function ChangeBackGround(){
+            document.getElementById('change-background').setAttribute("class","active-background");
+        }
+    </script>
 </section>

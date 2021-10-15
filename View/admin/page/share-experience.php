@@ -1,6 +1,8 @@
 <?php
 require_once('../../Model/DBconnect.php');
-require_once('../../Model/search_databese.php');
+$key = (isset($_GET['keyword'])) ? $_GET['keyword'] : [];
+
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 ?>
 <section>
     <!-- Content Wrapper. Contains page content -->
@@ -29,16 +31,13 @@ require_once('../../Model/search_databese.php');
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">報告書</h3>
+                                <h3 class="card-title">報告書</h3><br>
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-xs-12">
-                                        <form action="index.php" method="GET">
+                                        <form action="" method="GET">
                                             <div class="search">
-                                                <i class="fas fa-search"></i>
                                                 <input type="text" name="keyword" value="<?php (isset($_GET['keyword'])) ? $_GET['keyword'] : ''  ?>" placeholder="会社名">
-                                                <div class="btn_search">
-                                                    <button type="button" class="btn btn-info" action="">検索</button>
-                                                </div>
+                                                <button type="submit" class="btn btn-info">検索</button>
 
                                             </div>
 
@@ -65,11 +64,8 @@ require_once('../../Model/search_databese.php');
                                     </thead>
                                     <tbody class="share_experience_table_down">
                                         <?php
-                                        //    $sql = "SELECT Donhang.DonhangID, Khachhang.Hoten, Donhang.Ngaydathang
-                                        //     FROM Donhang
-                                        //     INNER JOIN Khachhang ON Donhang.KhachhangID = Khachhang.KhachhangID";
-                                        $listStudent = "SELECT *  FROM shiken INNER JOIN student ON student.student_code = shiken.student_code";
-                                        $students = mysqli_query($conn, $listStudent);
+                                        $listStudent1 = "SELECT *  FROM shiken INNER JOIN student ON student.student_code = shiken.student_code";
+                                        $students = mysqli_query($conn, $listStudent1);
 
                                         ?>
                                         <?php foreach ($students as $key => $students) : ?>
@@ -124,7 +120,7 @@ require_once('../../Model/search_databese.php');
                 return;
             }
 
-            $.post('delete-student.php', {
+            $.post('delete-share-experience.php', {
                 'student_code': student_code
             }, function(data) {
                 alert(data)

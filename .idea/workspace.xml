@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="197a0e28-a2d8-4dda-bdc9-27bea6e05432" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/View/admin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/admin/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/web/component/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/web/component/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/web/page/create_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/web/page/create_form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/web/page/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/web/page/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +34,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../poco_accessories" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -90,7 +86,11 @@
       <workItem from="1630772321319" duration="1097000" />
       <workItem from="1630835606195" duration="10430000" />
       <workItem from="1634141010527" duration="11838000" />
-      <workItem from="1634225538387" duration="9095000" />
+      <workItem from="1634225538387" duration="9380000" />
+      <workItem from="1634327959500" duration="459000" />
+      <workItem from="1634328428424" duration="40000" />
+      <workItem from="1634328469864" duration="10000" />
+      <workItem from="1634328491057" duration="11000" />
     </task>
     <servers />
   </component>

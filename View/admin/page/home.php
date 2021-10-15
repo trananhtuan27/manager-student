@@ -24,6 +24,13 @@ require_once('../../Model/DBconnect.php');
 
     <!-- Main content -->
     <section class="content">
+        <?php if (isset($_SESSION['edit-profile-success'])) { ?>
+            <div class="alert alert-primary" role="alert">
+                Sửa thông tin admin thông tin thành công!
+            </div>
+            <?php
+            unset($_SESSION['edit-profile-success']);
+        } ?>
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
@@ -32,7 +39,7 @@ require_once('../../Model/DBconnect.php');
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-success">
-                        <?php $sql  =  "SELECT COUNT(*) AS student_code FROM student";
+                        <?php $sql  =  "SELECT COUNT(*) AS student_code FROM student WHERE status = 0";
                         $query = mysqli_query($conn, $sql);
                         $data = mysqli_fetch_array($query);
                         $countStudent = $data["student_code"];
@@ -45,14 +52,14 @@ require_once('../../Model/DBconnect.php');
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="?view=share-experience" class="small-box-footer">詳しく <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="?view=student" class="small-box-footer">Học sinh <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-warning">
-                    <?php $sql  =  "SELECT COUNT(*) AS id FROM student";
+                    <?php $sql  =  "SELECT COUNT(*) AS id FROM shiken INNER JOIN student ON student.student_code = shiken.student_code";
                         $query = mysqli_query($conn, $sql);
                         $data = mysqli_fetch_array($query);
                         $countUser = $data["id"];
@@ -65,7 +72,7 @@ require_once('../../Model/DBconnect.php');
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="?view=user" class="small-box-footer">詳しく<i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="?view=share-experience" class="small-box-footer">Báo cáo<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

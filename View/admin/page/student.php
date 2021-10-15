@@ -27,6 +27,13 @@ require_once('../../Model/DBconnect.php');
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                        <?php if (isset($_SESSION['edit-student-success'])) { ?>
+                            <div class="alert alert-primary" role="alert">
+                               Sửa thông tin user thông tin thành công!
+                            </div>
+                            <?php
+                            unset($_SESSION['edit-student-success']);
+                        } ?>
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">利用者情報</h3>
@@ -48,7 +55,7 @@ require_once('../../Model/DBconnect.php');
                                     </thead>
                                     <tbody class="user_table_down">
                                     <?php
-                                    $listUser = 'select * from student';
+                                    $listUser = 'select * from student where status = 0';
                                     $student = mysqli_query($conn, $listUser);
                                     ?>
                                     <?php foreach ($student as $key => $student ): ?>
@@ -60,9 +67,9 @@ require_once('../../Model/DBconnect.php');
                                             <td><?php echo $student['gender']; ?></td>
                                             <td class="function-user">
                                                     <a class="btn-primary" style="border-radius: 5px; height: 50px;padding: 11px 15px;padding-top: 5px;"
-                                                        href="index.php?view=edit-user&id=<?php echo $student['id'] ?>">編集</a>
+                                                        href="index.php?view=edit-student&id=<?php echo $student['id'] ?>">編集</a>
                                                     <a class="btn btn-danger"
-                                                   onclick="deleteUser('<?php echo $student['id'] ?>')">削除</a>
+                                                   onclick="deleteUser('<?php echo $student['student_code'] ?>')">削除</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -96,18 +103,19 @@ require_once('../../Model/DBconnect.php');
         }
     </style>
     <script type="text/javascript">
-        function deleteUser(id) {
+        function deleteUser(student_code) {
             option = confirm('削除したいですか？')
             if (!option) {
                 return;
             }
-            $.post('delete-user.php', {
-                'id': id
+            $.post('delete-student.php', {
+                'student_code': student_code
             }, function (data) {
                 alert(data)
                 location.reload()
             })
         }
+        ChangeBackGround();
     </script>
 
 </section>

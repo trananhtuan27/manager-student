@@ -296,7 +296,7 @@ if (!empty($keyword)) {
                                             <a class="btn btn-primary"
                                                href="?view=edit_form&student_code=<?php echo $f['student_code'] ?>">編集</a>
                                             <a class="btn btn-danger" onclick="return confirm('削除したいですか？')"
-                                               href="?view=delete_student&student_code=<?php echo $f['student_code'] ?>">削除</a>
+                                               href="?view=delete-share-experience&student_code=<?php echo $f['student_code'] ?>">削除</a>
                                         <?php } ?>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる
                                         </button>

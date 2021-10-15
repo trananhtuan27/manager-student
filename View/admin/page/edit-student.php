@@ -13,43 +13,29 @@ $student = mysqli_fetch_array($query);
 
 if (isset($_POST['name'])) {
     $name = $_POST['name'];
-    $student_number = $_POST['student_number'];
-    $gender = $_POST['gender'];
-    $email = $_POST['email'];
     $password = $_POST['password'];
     $re_password = $_POST['re_password'];
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     if (empty($name)) {
         $error['name'] = "名前を入力してください。";
     }
-    if (empty($student_code)) {
-        $error['student_code'] = "学生番号を入力してください。";
-    }
-    if (empty($email)) {
-        $error['email'] = "メールアドレスを入力してください。";
-    }
-    if (empty($student_number)) {
-        $error['gender'] = "性別を選択してください。";
-    }
+
     if (empty($password)) {
         $error['password'] = "パスワードを入力してください。";
     }
     if ($password != $re_password) {
         $error['re_password'] = "パスワードを合わせていませんでした。";
     }
-    $sql = "UPDATE student SET name='$name',email='$email',gender='$gender',student_code='$student_code',password = '$password_hash' WHERE id='$id'";
+    if (empty($error)) {
+        $sql = "UPDATE student SET name='$name' ,password = '$password_hash' WHERE id='$id'";
 
-
-    $query = mysqli_query($conn, $sql);
-    if (isset($query)) {
-        echo " <script>alert('編集を完了しました。')
-    </script>";
-    header('Location: http://localhost/democode/view/admin/index.php?view=user');
-    } else {
-        echo " <script>alert('編集出来ませんでした！')
-        </script>";
-     }
-    $conn->close();
+        $query = mysqli_query($conn, $sql);
+        if (isset($query)) {
+            $_SESSION['edit-student-success'] = "Sửa Học sinh thành công";
+            header('Location: http://localhost/democode/view/admin/index.php?view=student');
+        }
+        $conn->close();
+    }
 }
 
 ?>
@@ -96,7 +82,7 @@ if (isset($_POST['name'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">メールアドレス</label>
-                                    <input type="email" class="form-control" name="email"
+                                    <input type="email" class="form-control" name="email" readonly="readonly"
                                            value="<?php echo $student['email']; ?>">
                                 </div>
                                 <div class="error-validate">
@@ -104,18 +90,16 @@ if (isset($_POST['name'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">学生番号</label>
-                                    <input type="text" class="form-control" name="student_number"
+                                    <input type="text" class="form-control" name="student_code" readonly="readonly"
                                            value="<?php echo $student['student_code']; ?>">
                                 </div>
                                 <div class="error-validate">
                                     <span><?php echo (isset($error['student_code'])) ? $error['student_code'] : '' ?></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">性別</label>
-                                    <select class="form-control" name="gender">
-                                        <option>男性</option>
-                                        <option>女性</option>
-                                    </select>
+                                    <label for="exampleInputEmail1">Giới tính</label>
+                                    <input type="text" class="form-control" name="gender" readonly="readonly"
+                                           value="<?php echo $student['gender']; ?>">
                                 </div>
                                 <div class="error-validate">
                                     <span><?php echo (isset($error['gender'])) ? $error['gender'] : '' ?></span>
@@ -134,7 +118,7 @@ if (isset($_POST['name'])) {
                                 <div class="error-validate">
                                     <span><?php echo (isset($error['re_password'])) ? $error['re_password'] : '' ?></span>
                                 </div>
-                               
+
                             </div>
                             <!-- /.card-body -->
 
